@@ -1,31 +1,122 @@
 :root {
-  font-family: Arial, sans-serif;
+  font-family: "Segoe UI", Arial, sans-serif;
   line-height: 1.6;
-  color: #203044;
-  background: #f5f7fa;
+  color: #18324b;
+  background: #eef4f7;
+  font-synthesis: none;
 }
 
 body {
-  max-width: 960px;
+  max-width: 1120px;
   margin: 0 auto;
-  padding: 2rem 1.25rem;
+  padding: 3rem 1.5rem;
 }
 
 header {
-  border-bottom: 3px solid #246b86;
-  padding-bottom: 1rem;
+  position: relative;
+  overflow: hidden;
+  padding: 2.5rem 2.75rem;
+  border-radius: 1.25rem;
+  color: #ffffff;
+  background: linear-gradient(135deg, #123b56, #147d87);
+  box-shadow: 0 1rem 2.5rem rgb(18 59 86 / 18%);
+}
+
+header::after {
+  position: absolute;
+  right: -4rem;
+  bottom: -5rem;
+  width: 15rem;
+  height: 15rem;
+  border: 2rem solid rgb(255 255 255 / 10%);
+  border-radius: 50%;
+  content: "";
+}
+
+header p:first-child {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 0.75rem;
+  color: #b7eef0;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+header p:last-child {
+  position: relative;
+  z-index: 1;
+  max-width: 42rem;
+  margin: 0;
+  color: #d8f1f2;
+}
+
+h1 {
+  position: relative;
+  z-index: 1;
+  max-width: 38rem;
+  margin: 0 0 0.75rem;
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  letter-spacing: -0.04em;
 }
 
 h1, h2 {
   line-height: 1.2;
 }
 
-section {
+main {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
   margin: 2rem 0;
 }
 
+section {
+  margin: 0;
+  padding: 1.75rem;
+  border: 1px solid #d5e2e8;
+  border-radius: 1rem;
+  background: #ffffff;
+  box-shadow: 0 0.5rem 1.5rem rgb(24 50 75 / 6%);
+}
+
+h2 {
+  margin-top: 0;
+  color: #123b56;
+  font-size: 1.35rem;
+}
+
+section p {
+  color: #496275;
+}
+
+section p:last-child {
+  margin-bottom: 0;
+}
+
 footer {
-  border-top: 1px solid #c9d2dd;
-  padding-top: 1rem;
+  padding: 1.25rem 0 0;
+  border-top: 1px solid #c5d5dd;
   font-size: 0.875rem;
+  color: #607989;
+}
+
+footer p {
+  margin-bottom: 0;
+}
+
+@media (max-width: 700px) {
+  body {
+    padding: 1.25rem 1rem;
+  }
+
+  header {
+    padding: 2rem 1.5rem;
+  }
+
+  main {
+    grid-template-columns: 1fr;
+    margin: 1.25rem 0;
+  }
 }
