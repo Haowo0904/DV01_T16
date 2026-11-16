@@ -6,7 +6,9 @@
   <meta name="description" content="A data visualisation project exploring hospitalised road crash injuries in Australia from 2011 to 2021.">
   <title>Hospitalised Road Crash Injuries in Australia</title>
   <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js" defer></script>
   <script src="js/main.js" defer></script>
+  <script src="js/distributions.js" defer></script>
 </head>
 <body>
   <header>
@@ -14,19 +16,72 @@
     <h1>Hospitalised Road Crash Injuries</h1>
     <p>Exploring non-fatal hospitalised injuries associated with road traffic crashes.</p>
   </header>
+  <nav aria-label="Section navigation"><a href="#overview">Overview</a><a href="#comparison">Road User Comparison and Changes</a><a href="#distributions">Age and Sex Distributions</a></nav>
   <main>
-    <section aria-labelledby="about-heading">
-      <h2 id="about-heading">About this project</h2>
-      <p>This project will use BITRE's September 2023 data release to explore national trends, road user groups, changes between years, and age and sex distributions.</p>
-      <p>Interactive visualisations will be added as the project develops.</p>
+    <section id="overview" aria-labelledby="overview-heading">
+      <h2 id="overview-heading">Overview</h2>
+      <p>Explore hospitalised road crash injury trends by road user group in Australia, 2011–2021, using BITRE’s September 2023 data release.</p>
+      <h3>Q1 · National trend</h3>
+      <p>How did total hospitalised road crash injury cases change from 2011 to 2021?</p>
+      <p id="trend-status" role="status">Loading national and road user data…</p>
+      <div id="q1-chart" class="distribution-scroll" role="region" aria-label="National trend chart" tabindex="0"></div>
+      <p>Reporting changes: Victoria in 2012; NSW from June 2017. These changes affect comparability. The chart describes observed changes and does not establish their causes.</p>
+      <details><summary>View national trend data table</summary><div id="q1-table" class="distribution-scroll" tabindex="0"></div></details>
     </section>
-    <section aria-labelledby="data-heading">
-      <h2 id="data-heading">Understanding the data</h2>
-      <p>Hospitalised injury cases are distinct from crashes and fatalities. Case counts alone do not measure individual injury risk; population size and travel exposure may differ between groups.</p>
+    <section id="comparison" aria-labelledby="comparison-heading">
+      <h2 id="comparison-heading">Road User Comparison and Changes</h2>
+      <article>
+        <h3>Q2 · Road user trends</h3>
+        <p>How did case counts and percentages change across road user groups? Shares use the national total for the same year, regardless of which groups are selected.</p>
+        <label for="q2-measure">Measure</label>
+        <select id="q2-measure" disabled><option value="hospitalisations">Hospitalisation cases</option><option value="percentage_share">Share of national cases (%)</option></select>
+        <fieldset id="q2-groups"><legend>Road user groups</legend></fieldset>
+        <p id="q2-status" role="status"></p>
+        <div id="q2-chart" class="distribution-scroll" role="region" aria-label="Road user trend chart" tabindex="0"></div>
+        <details><summary>View road user trend data table</summary><div id="q2-table" class="distribution-scroll" tabindex="0"></div></details>
+      </article>
+      <article>
+        <h3>Q3 · Changes between two years</h3>
+        <p>Which road user groups contributed most to the change in total cases? Bars show signed changes in case counts, ordered from the largest increase to the largest decrease. All groups remain in this comparison.</p>
+        <div class="distribution-controls"><label for="q3-start">Start year</label><select id="q3-start" disabled></select><label for="q3-end">End year</label><select id="q3-end" disabled></select></div>
+        <p id="q3-status" role="status"></p>
+        <div id="q3-chart" class="distribution-scroll" role="region" aria-label="Change in cases by road user" tabindex="0"></div>
+        <details><summary>View changes data table</summary><div id="q3-table" class="distribution-scroll" tabindex="0"></div></details>
+      </article>
+    </section>
+    <section id="distributions" aria-labelledby="distributions-heading">
+      <h2 id="distributions-heading">Age and Sex Distributions</h2>
+      <p>Compare the composition of hospitalised injury cases within each road user group.</p>
+      <div class="distribution-controls">
+        <label for="distribution-year">Year for both charts</label>
+        <select id="distribution-year" disabled></select>
+      </div>
+      <p id="distribution-status" role="status" aria-live="polite">Loading age and sex data…</p>
+      <p class="distribution-help">Hover, focus with Tab, or tap a cell or segment for details. Press Escape to dismiss. On small screens, scroll each chart horizontally.</p>
+      <article aria-labelledby="q4-heading">
+        <h3 id="q4-heading">Q4 · Age distribution</h3>
+        <p>How did the age distribution of hospitalised injury cases differ across road user groups in a selected year?</p>
+        <div id="q4-legend" class="distribution-legend"></div>
+        <div id="q4-chart" class="distribution-scroll" role="region" aria-label="Age distribution heatmap, horizontally scrollable" tabindex="0"></div>
+        <p>Percentages use the total for the same year and road user. Age bands have unequal widths. Percentages describe recorded hospitalised cases, not injury risk. “Missing” is a recorded age category; a hatched cell means no record exists for that combination, not zero cases.</p>
+        <details><summary>View age distribution data table</summary><div id="q4-table" class="distribution-scroll" role="region" aria-label="Age distribution table" tabindex="0"></div></details>
+      </article>
+      <article aria-labelledby="q5-heading">
+        <h3 id="q5-heading">Q5 · Sex distribution</h3>
+        <p>How did the sex distribution of hospitalised injury cases differ across road user groups in a selected year?</p>
+        <div id="q5-legend" class="distribution-legend"></div>
+        <div id="q5-chart" class="distribution-scroll" role="region" aria-label="Sex distribution bars, horizontally scrollable" tabindex="0"></div>
+        <p id="q5-totals"></p>
+        <details><summary>View sex distribution data table</summary><div id="q5-table" class="distribution-scroll" role="region" aria-label="Sex distribution table" tabindex="0"></div></details>
+      </article>
+      <div id="distribution-tooltip" role="tooltip" hidden></div>
+      <noscript>Enable JavaScript to view the interactive charts. Source data: <a href="data/q4_age_distribution.csv">age CSV</a> and <a href="data/q5_sex_distribution.csv">sex CSV</a>.</noscript>
     </section>
   </main>
+  <div id="trend-tooltip" role="tooltip" hidden></div>
   <footer>
-    <p>DV01_T16 · Data source planned: Bureau of Infrastructure and Transport Research Economics (BITRE).</p>
+    <p>Source: BITRE, September 2023 release; supplied project CSV extracts. Hospitalised cases are distinct from crashes and fatalities. Counts and shares do not measure individual injury risk: population size and travel exposure differ between groups. Missing records are not assumed to be zero.</p>
+    <p>DV01_T16 · Data source: Bureau of Infrastructure and Transport Research Economics (BITRE).</p>
   </footer>
 </body>
 </html>

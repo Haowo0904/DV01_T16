@@ -106,6 +106,90 @@ footer p {
   margin-bottom: 0;
 }
 
+#distributions {
+  grid-column: 1 / -1;
+  min-width: 0;
+}
+
+#distributions article {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #d5e2e8;
+  min-width: 0;
+}
+
+.distribution-controls, .distribution-legend {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+}
+
+.distribution-controls label { font-weight: 600; }
+.distribution-controls select {
+  padding: 0.5rem 2rem 0.5rem 0.75rem;
+  font: inherit;
+  color: #18324b;
+  background: white;
+  border: 1px solid #607989;
+  border-radius: 0.4rem;
+}
+
+.distribution-help, .distribution-legend { font-size: 0.875rem; }
+.distribution-legend { margin: 1rem 0; }
+.age-colour-legend { width: 260px; max-width: 100%; }
+.age-colour-ramp { height: 14px; border: 1px solid #607989; }
+.age-colour-ticks { display: flex; justify-content: space-between; }
+.absent-key { flex-basis: 100%; }
+.sex-legend-item { display: inline-flex; align-items: center; gap: 0.5rem; }
+.sex-legend-item i { width: 16px; height: 16px; flex-shrink: 0; border-radius: 2px; }
+.distribution-scroll { max-width: 100%; overflow-x: auto; margin: 1rem 0; }
+.distribution-scroll svg { display: block; font: 12px "Segoe UI", Arial, sans-serif; }
+.distribution-scroll .cell-value { font-size: 11px; }
+.distribution-scroll svg .row-labels, .distribution-scroll svg .column-labels { fill: #18324b; }
+#distributions :focus-visible { outline: 3px solid #c45918; outline-offset: 3px; }
+#distributions svg rect:focus { outline: 3px solid #111; outline-offset: -2px; }
+.age-cell, .sex-segment { cursor: help; }
+#distributions summary { cursor: pointer; font-weight: 600; padding: 0.5rem 0; }
+#distributions table { border-collapse: collapse; min-width: 640px; width: 100%; font-size: 0.875rem; }
+#distributions caption { text-align: left; padding: 0.75rem 0; font-weight: 600; }
+#distributions th, #distributions td { text-align: left; padding: 0.6rem; border-bottom: 1px solid #d5e2e8; }
+#distributions th { background: #eef4f7; }
+#distributions tbody tr:nth-child(even) { background: #f7fafb; }
+#distribution-tooltip {
+  position: fixed;
+  z-index: 20;
+  max-width: min(320px, calc(100vw - 40px));
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  background: #123b56;
+  color: white;
+  font-size: 0.875rem;
+  box-shadow: 0 4px 16px rgb(0 0 0 / 20%);
+  pointer-events: none;
+}
+
+nav { display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; margin-top: 1.5rem; }
+nav a { color: #123b56; font-weight: 600; }
+#overview, #comparison { grid-column: 1 / -1; min-width: 0; }
+#comparison article + article { margin-top: 2rem; border-top: 1px solid #d5e2e8; padding-top: 1rem; }
+#comparison select { font: inherit; padding: 0.5rem; }
+#q2-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 0.6rem; margin: 1rem 0; border: 1px solid #d5e2e8; }
+#q2-groups label { display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; }
+#q2-groups i { width: 14px; height: 14px; flex-shrink: 0; }
+#q2-groups input { width: 18px; height: 18px; }
+.data-point, .change-bar { cursor: help; }
+:focus-visible { outline: 3px solid #c45918; outline-offset: 3px; }
+svg .data-point:focus, svg .change-bar:focus { stroke: #111; stroke-width: 3px; }
+main table { border-collapse: collapse; min-width: 640px; width: 100%; font-size: 0.875rem; }
+main caption { text-align: left; padding: 0.75rem 0; font-weight: 600; }
+main th, main td { text-align: left; padding: 0.6rem; border-bottom: 1px solid #d5e2e8; }
+main th { background: #eef4f7; }
+main tbody tr:nth-child(even) { background: #f7fafb; }
+main summary { cursor: pointer; padding: 0.5rem 0; font-weight: 600; }
+#trend-tooltip { position: fixed; z-index: 20; max-width: min(340px, calc(100vw - 40px)); padding: 0.75rem; border-radius: 0.5rem; color: white; background: #123b56; font-size: 0.875rem; pointer-events: none; }
+/* Updates are immediate: no animation, including for reduced-motion users. */
+
 @media (max-width: 700px) {
   body {
     padding: 1.25rem 1rem;
