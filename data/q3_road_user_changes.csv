@@ -1,0 +1,13 @@
+"start_year","road_user","start_cases","end_year","road_user (Right)","end_cases","absolute_change","percentage_status","percentage_change"
+2011,"Bus occupant",214,2021,"Bus occupant",169,-45,"Valid",-21.02803738317757
+2011,"Car driver",10948,2021,"Car driver",13327,2379,"Valid",21.729996346364633
+2011,"Car passenger",4853,2021,"Car passenger",4495,-358,"Valid",-7.376880280239027
+2011,"Car unknown position",889,2021,"Car unknown position",717,-172,"Valid",-19.34758155230596
+2011,"Heavy transport driver",455,2021,"Heavy transport driver",383,-72,"Valid",-15.824175824175823
+2011,"Heavy transport passenger",52,2021,"Heavy transport passenger",56,4,"Valid",7.6923076923076925
+2011,"Heavy transport unknown position",55,2021,"Heavy transport unknown position",36,-19,"Valid",-34.54545454545455
+2011,"Motorcyclist",7565,2021,"Motorcyclist",8883,1318,"Valid",17.422339722405816
+2011,"Other or unknown",610,2021,"Other or unknown",601,-9,"Valid",-1.4754098360655739
+2011,"Pedal cyclist",5391,2021,"Pedal cyclist",8163,2772,"Valid",51.41903171953256
+2011,"Pedestrian",2754,2021,"Pedestrian",2334,-420,"Valid",-15.250544662309368
+2011,"Pick-up truck or van occupant",247,2021,"Pick-up truck or van occupant",341,94,"Valid",38.05668016194332

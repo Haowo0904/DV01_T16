@@ -1,0 +1,277 @@
+"year","sex","road_user","hospitalisations","percentage_share"
+2011,"Female","Bus occupant",140,65.42056074766354
+2011,"Female","Car driver",5068,46.29156010230179
+2011,"Female","Car passenger",2808,57.86111683494746
+2011,"Female","Car unknown position",387,43.532058492688414
+2011,"Female","Heavy transport driver",11,2.417582417582418
+2011,"Female","Heavy transport passenger",18,34.61538461538461
+2011,"Female","Heavy transport unknown position",5,9.090909090909092
+2011,"Female","Motorcyclist",737,9.742233972240582
+2011,"Female","Other or unknown",188,30.81967213114754
+2011,"Female","Pedal cyclist",1125,20.868113522537563
+2011,"Female","Pedestrian",1173,42.592592592592595
+2011,"Female","Pick-up truck or van occupant",52,21.052631578947366
+2011,"Male","Bus occupant",74,34.57943925233645
+2011,"Male","Car driver",5880,53.70843989769821
+2011,"Male","Car passenger",2045,42.13888316505254
+2011,"Male","Car unknown position",502,56.46794150731158
+2011,"Male","Heavy transport driver",444,97.58241758241758
+2011,"Male","Heavy transport passenger",34,65.38461538461539
+2011,"Male","Heavy transport unknown position",50,90.9090909090909
+2011,"Male","Motorcyclist",6828,90.25776602775942
+2011,"Male","Other or unknown",422,69.18032786885246
+2011,"Male","Pedal cyclist",4266,79.13188647746243
+2011,"Male","Pedestrian",1581,57.407407407407405
+2011,"Male","Pick-up truck or van occupant",195,78.94736842105263
+2012,"Female","Bus occupant",129,59.44700460829493
+2012,"Female","Car driver",5017,46.42791042013696
+2012,"Female","Car passenger",2694,56.85943436048966
+2012,"Female","Car unknown position",406,45.36312849162012
+2012,"Female","Heavy transport driver",13,3.125
+2012,"Female","Heavy transport passenger",11,23.404255319148938
+2012,"Female","Heavy transport unknown position",5,10.416666666666668
+2012,"Female","Motorcyclist",774,10.015527950310558
+2012,"Female","Other or unknown",194,34.4582593250444
+2012,"Female","Pedal cyclist",1182,21.02828678171144
+2012,"Female","Pedestrian",1113,41.65419161676647
+2012,"Female","Pick-up truck or van occupant",55,20.146520146520146
+2012,"Male","Bus occupant",88,40.55299539170507
+2012,"Male","Car driver",5789,53.57208957986303
+2012,"Male","Car passenger",2044,43.14056563951034
+2012,"Male","Car unknown position",489,54.63687150837989
+2012,"Male","Heavy transport driver",403,96.875
+2012,"Male","Heavy transport passenger",36,76.59574468085107
+2012,"Male","Heavy transport unknown position",43,89.58333333333334
+2012,"Male","Motorcyclist",6954,89.98447204968944
+2012,"Male","Other or unknown",369,65.54174067495559
+2012,"Male","Pedal cyclist",4439,78.97171321828857
+2012,"Male","Pedestrian",1559,58.34580838323353
+2012,"Male","Pick-up truck or van occupant",218,79.85347985347985
+2013,"Female","Bus occupant",134,59.29203539823009
+2013,"Female","Car driver",5178,47.32224456223725
+2013,"Female","Car passenger",2847,58.96851698425849
+2013,"Female","Car unknown position",401,49.02200488997555
+2013,"Female","Heavy transport driver",8,1.9277108433734942
+2013,"Female","Heavy transport passenger",10,25
+2013,"Female","Heavy transport unknown position",1,3.4482758620689653
+2013,"Female","Motorcyclist",827,10.314292841107509
+2013,"Female","Other or unknown",176,32.83582089552239
+2013,"Female","Pedal cyclist",1317,21.031619290961352
+2013,"Female","Pedestrian",1104,41.550621001129095
+2013,"Female","Pick-up truck or van occupant",39,16.956521739130434
+2013,"Male","Bus occupant",92,40.707964601769916
+2013,"Male","Car driver",5763,52.66861634070554
+2013,"Male","Car passenger",1981,41.03148301574151
+2013,"Male","Car unknown position",417,50.97799511002445
+2013,"Male","Heavy transport driver",407,98.0722891566265
+2013,"Male","Heavy transport passenger",30,75
+2013,"Male","Heavy transport unknown position",28,96.55172413793103
+2013,"Male","Motorcyclist",7190,89.6732352207533
+2013,"Male","Other or unknown",360,67.16417910447761
+2013,"Male","Pedal cyclist",4945,78.96838070903864
+2013,"Male","Pedestrian",1553,58.449378998870905
+2013,"Male","Pick-up truck or van occupant",191,83.04347826086956
+2013,"intersex or indeterminate or missing","Car driver",1,0.009139097057210747
+2013,"intersex or indeterminate or missing","Motorcyclist",1,0.01247193813918683
+2014,"Female","Bus occupant",204,70.58823529411765
+2014,"Female","Car driver",5316,47.7971587843913
+2014,"Female","Car passenger",2790,60.324324324324316
+2014,"Female","Car unknown position",357,49.03846153846153
+2014,"Female","Heavy transport driver",10,2.6525198938992043
+2014,"Female","Heavy transport passenger",22,40
+2014,"Female","Heavy transport unknown position",8,16.666666666666664
+2014,"Female","Motorcyclist",838,10.055195584353251
+2014,"Female","Other or unknown",161,31.69291338582677
+2014,"Female","Pedal cyclist",1418,21.36829415310428
+2014,"Female","Pedestrian",1124,44.00939702427565
+2014,"Female","Pick-up truck or van occupant",46,19.246861924686193
+2014,"Male","Bus occupant",85,29.411764705882355
+2014,"Male","Car driver",5806,52.20284121560871
+2014,"Male","Car passenger",1835,39.67567567567568
+2014,"Male","Car unknown position",371,50.96153846153846
+2014,"Male","Heavy transport driver",367,97.34748010610079
+2014,"Male","Heavy transport passenger",33,60
+2014,"Male","Heavy transport unknown position",40,83.33333333333334
+2014,"Male","Motorcyclist",7496,89.94480441564676
+2014,"Male","Other or unknown",347,68.30708661417323
+2014,"Male","Pedal cyclist",5218,78.63170584689571
+2014,"Male","Pedestrian",1430,55.99060297572436
+2014,"Male","Pick-up truck or van occupant",193,80.75313807531381
+2015,"Female","Bus occupant",145,58.94308943089431
+2015,"Female","Car driver",5907,48.56532105566061
+2015,"Female","Car passenger",2972,59.9435256151674
+2015,"Female","Car unknown position",408,50.24630541871922
+2015,"Female","Heavy transport driver",7,1.5765765765765765
+2015,"Female","Heavy transport passenger",8,18.6046511627907
+2015,"Female","Heavy transport unknown position",1,4.3478260869565215
+2015,"Female","Motorcyclist",881,10.61701614846951
+2015,"Female","Other or unknown",185,36.779324055666
+2015,"Female","Pedal cyclist",1425,21.217986896962476
+2015,"Female","Pedestrian",1177,44.803958888465935
+2015,"Female","Pick-up truck or van occupant",45,18.072289156626507
+2015,"Male","Bus occupant",101,41.05691056910569
+2015,"Male","Car driver",6256,51.43467894433938
+2015,"Male","Car passenger",1985,40.0363049616781
+2015,"Male","Car unknown position",404,49.75369458128079
+2015,"Male","Heavy transport driver",437,98.42342342342343
+2015,"Male","Heavy transport passenger",35,81.3953488372093
+2015,"Male","Heavy transport unknown position",22,95.65217391304348
+2015,"Male","Motorcyclist",7417,89.38298385153048
+2015,"Male","Other or unknown",318,63.22067594433399
+2015,"Male","Pedal cyclist",5291,78.78201310303751
+2015,"Male","Pedestrian",1450,55.196041111534065
+2015,"Male","Pick-up truck or van occupant",204,81.92771084337349
+2015,"intersex or indeterminate or missing","Car passenger",1,0.02016942315449778
+2016,"Female","Bus occupant",175,61.83745583038869
+2016,"Female","Car driver",6390,48.43110504774898
+2016,"Female","Car passenger",3016,59.10248873211836
+2016,"Female","Car unknown position",393,48.63861386138614
+2016,"Female","Heavy transport driver",9,2.2332506203473943
+2016,"Female","Heavy transport passenger",13,30.952380952380953
+2016,"Female","Heavy transport unknown position",3,7.6923076923076925
+2016,"Female","Motorcyclist",904,10.602861834388928
+2016,"Female","Other or unknown",244,39.35483870967742
+2016,"Female","Pedal cyclist",1519,22.001738122827348
+2016,"Female","Pedestrian",1222,44.54976303317535
+2016,"Female","Pick-up truck or van occupant",64,21.476510067114095
+2016,"Male","Bus occupant",108,38.16254416961131
+2016,"Male","Car driver",6804,51.56889495225102
+2016,"Male","Car passenger",2087,40.89751126788164
+2016,"Male","Car unknown position",415,51.36138613861386
+2016,"Male","Heavy transport driver",394,97.76674937965261
+2016,"Male","Heavy transport passenger",29,69.04761904761905
+2016,"Male","Heavy transport unknown position",36,92.3076923076923
+2016,"Male","Motorcyclist",7622,89.39713816561107
+2016,"Male","Other or unknown",376,60.64516129032258
+2016,"Male","Pedal cyclist",5385,77.99826187717265
+2016,"Male","Pedestrian",1521,55.45023696682464
+2016,"Male","Pick-up truck or van occupant",234,78.52348993288591
+2017,"Female","Bus occupant",176,66.41509433962264
+2017,"Female","Car driver",6410,48.31536896057888
+2017,"Female","Car passenger",3185,62.426499411995295
+2017,"Female","Car unknown position",386,49.67824967824968
+2017,"Female","Heavy transport driver",12,2.684563758389262
+2017,"Female","Heavy transport passenger",21,42.857142857142854
+2017,"Female","Heavy transport unknown position",1,3.125
+2017,"Female","Motorcyclist",871,9.966815425105848
+2017,"Female","Other or unknown",222,37
+2017,"Female","Pedal cyclist",1509,21.325607687959298
+2017,"Female","Pedestrian",1228,45.24686809137804
+2017,"Female","Pick-up truck or van occupant",62,22.878228782287824
+2017,"Male","Bus occupant",89,33.58490566037736
+2017,"Male","Car driver",6857,51.68463103942113
+2017,"Male","Car passenger",1917,37.573500588004705
+2017,"Male","Car unknown position",391,50.32175032175032
+2017,"Male","Heavy transport driver",435,97.31543624161074
+2017,"Male","Heavy transport passenger",28,57.14285714285714
+2017,"Male","Heavy transport unknown position",31,96.875
+2017,"Male","Motorcyclist",7868,90.03318457489415
+2017,"Male","Other or unknown",378,63
+2017,"Male","Pedal cyclist",5567,78.6743923120407
+2017,"Male","Pedestrian",1486,54.75313190862195
+2017,"Male","Pick-up truck or van occupant",209,77.12177121771218
+2018,"Female","Bus occupant",149,60.32388663967612
+2018,"Female","Car driver",6629,48.76057374034571
+2018,"Female","Car passenger",3149,60.48789857856319
+2018,"Female","Car unknown position",417,48.26388888888889
+2018,"Female","Heavy transport driver",14,3.203661327231121
+2018,"Female","Heavy transport passenger",16,23.18840579710145
+2018,"Female","Heavy transport unknown position",5,10.638297872340425
+2018,"Female","Motorcyclist",894,10.367621477444045
+2018,"Female","Other or unknown",230,38.14262023217247
+2018,"Female","Pedal cyclist",1523,21.88532835177468
+2018,"Female","Pedestrian",1194,44.87034949267193
+2018,"Female","Pick-up truck or van occupant",53,18.996415770609318
+2018,"Male","Bus occupant",98,39.67611336032389
+2018,"Male","Car driver",6966,51.23942625965429
+2018,"Male","Car passenger",2057,39.5121014214368
+2018,"Male","Car unknown position",447,51.736111111111114
+2018,"Male","Heavy transport driver",423,96.79633867276888
+2018,"Male","Heavy transport passenger",53,76.81159420289855
+2018,"Male","Heavy transport unknown position",42,89.36170212765957
+2018,"Male","Motorcyclist",7729,89.63237852255595
+2018,"Male","Other or unknown",373,61.857379767827524
+2018,"Male","Pedal cyclist",5434,78.08593188676534
+2018,"Male","Pedestrian",1467,55.12965050732808
+2018,"Male","Pick-up truck or van occupant",226,81.00358422939068
+2018,"intersex or indeterminate or missing","Pedal cyclist",2,0.028739761459979883
+2019,"Female","Bus occupant",156,61.1764705882353
+2019,"Female","Car driver",6823,50.60821836522771
+2019,"Female","Car passenger",3118,62.49749448787332
+2019,"Female","Car unknown position",393,49.309912170639905
+2019,"Female","Heavy transport driver",19,4.470588235294118
+2019,"Female","Heavy transport passenger",12,23.076923076923077
+2019,"Female","Heavy transport unknown position",7,14.893617021276595
+2019,"Female","Motorcyclist",980,10.981622590766472
+2019,"Female","Other or unknown",237,38.225806451612904
+2019,"Female","Pedal cyclist",1517,20.7751301013421
+2019,"Female","Pedestrian",1189,43.826022852930336
+2019,"Female","Pick-up truck or van occupant",48,18.461538461538463
+2019,"Male","Bus occupant",98,38.43137254901961
+2019,"Male","Car driver",6658,49.38436433763537
+2019,"Male","Car passenger",1871,37.502505512126675
+2019,"Male","Car unknown position",404,50.690087829360095
+2019,"Male","Heavy transport driver",406,95.52941176470588
+2019,"Male","Heavy transport passenger",40,76.92307692307693
+2019,"Male","Heavy transport unknown position",40,85.1063829787234
+2019,"Male","Motorcyclist",7944,89.01837740923352
+2019,"Male","Other or unknown",383,61.7741935483871
+2019,"Male","Pedal cyclist",5785,79.2248698986579
+2019,"Male","Pedestrian",1524,56.173977147069664
+2019,"Male","Pick-up truck or van occupant",212,81.53846153846153
+2019,"intersex or indeterminate or missing","Bus occupant",1,0.39215686274509803
+2019,"intersex or indeterminate or missing","Car driver",1,0.007417297136923305
+2020,"Female","Bus occupant",101,58.38150289017341
+2020,"Female","Car driver",5626,46.05058525006139
+2020,"Female","Car passenger",2587,59.55340699815837
+2020,"Female","Car unknown position",367,50.20519835841313
+2020,"Female","Heavy transport driver",10,2.4271844660194173
+2020,"Female","Heavy transport passenger",15,31.25
+2020,"Female","Heavy transport unknown position",6,15
+2020,"Female","Motorcyclist",931,10.720865960386918
+2020,"Female","Other or unknown",220,37.80068728522337
+2020,"Female","Pedal cyclist",1946,23.355736917906867
+2020,"Female","Pedestrian",913,43.414170233000476
+2020,"Female","Pick-up truck or van occupant",59,19.666666666666664
+2020,"Male","Bus occupant",72,41.61849710982659
+2020,"Male","Car driver",6588,53.92485880330686
+2020,"Male","Car passenger",1757,40.44659300184162
+2020,"Male","Car unknown position",363,49.658002735978116
+2020,"Male","Heavy transport driver",402,97.57281553398059
+2020,"Male","Heavy transport passenger",33,68.75
+2020,"Male","Heavy transport unknown position",34,85
+2020,"Male","Motorcyclist",7752,89.26761860893598
+2020,"Male","Other or unknown",362,62.19931271477663
+2020,"Male","Pedal cyclist",6385,76.63226116178589
+2020,"Male","Pedestrian",1189,56.53827864954827
+2020,"Male","Pick-up truck or van occupant",241,80.33333333333333
+2020,"intersex or indeterminate or missing","Car driver",3,0.024555946631742653
+2020,"intersex or indeterminate or missing","Car unknown position",1,0.13679890560875513
+2020,"intersex or indeterminate or missing","Motorcyclist",1,0.011515430677107323
+2020,"intersex or indeterminate or missing","Pedal cyclist",1,0.01200192030724916
+2020,"intersex or indeterminate or missing","Pedestrian",1,0.0475511174512601
+2021,"Female","Bus occupant",109,64.49704142011834
+2021,"Female","Car driver",6602,49.538530802131014
+2021,"Female","Car passenger",2698,60.02224694104561
+2021,"Female","Car unknown position",336,46.86192468619247
+2021,"Female","Heavy transport driver",11,2.8720626631853787
+2021,"Female","Heavy transport passenger",18,32.142857142857146
+2021,"Female","Heavy transport unknown position",2,5.555555555555555
+2021,"Female","Motorcyclist",992,11.167398401440956
+2021,"Female","Other or unknown",194,32.27953410981697
+2021,"Female","Pedal cyclist",1737,21.27894156560088
+2021,"Female","Pedestrian",945,40.48843187660668
+2021,"Female","Pick-up truck or van occupant",72,21.114369501466275
+2021,"Male","Bus occupant",60,35.50295857988166
+2021,"Male","Car driver",6725,50.46146919786899
+2021,"Male","Car passenger",1797,39.9777530589544
+2021,"Male","Car unknown position",381,53.13807531380753
+2021,"Male","Heavy transport driver",372,97.12793733681463
+2021,"Male","Heavy transport passenger",38,67.85714285714286
+2021,"Male","Heavy transport unknown position",34,94.44444444444444
+2021,"Male","Motorcyclist",7891,88.83260159855905
+2021,"Male","Other or unknown",407,67.72046589018302
+2021,"Male","Pedal cyclist",6425,78.70880803626117
+2021,"Male","Pedestrian",1389,59.511568123393324
+2021,"Male","Pick-up truck or van occupant",269,78.88563049853371
+2021,"intersex or indeterminate or missing","Pedal cyclist",1,0.012250398137939484
