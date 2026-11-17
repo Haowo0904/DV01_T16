@@ -13,6 +13,7 @@ window.roadUserColour = roadUser => {
   const pct = value => value == null ? "N/A" : `${value.toFixed(1)}%`;
   const tooltip = document.querySelector("#trend-tooltip");
   let national = [], annual = [], groups = [], years = [];
+  const defaultGroups = ["Car driver", "Motorcyclist", "Pedal cyclist"];
   let selected = new Set();
 
   function parse(row) {
@@ -63,7 +64,7 @@ window.roadUserColour = roadUser => {
 
   function lineChart(id, rows, measure, series, description) {
     const { svg, width, height } = frame(id, description);
-    const x = d3.scaleLinear().domain(d3.extent(years)).range([85, width - 24]);
+    const x = d3.scaleLinear().domain(d3.extent(years)).range([85, width - (id === "q2" ? 225 : 24)]);
     const y = d3.scaleLinear().domain([0, d3.max(rows, d => d[measure]) || 1]).nice().range([height - 48, 64]);
     svg.selectAll("g.x-axis").data([null]).join("g").attr("class", "x-axis")
       .attr("transform", `translate(0,${height - 48})`).call(d3.axisBottom(x).tickValues(years).tickFormat(d3.format("d")));
@@ -80,12 +81,32 @@ window.roadUserColour = roadUser => {
       .attr("r", 5).attr("fill", d => d.road_user ? window.roadUserColour(d.road_user) : "#007c83")
       .attr("stroke", "white");
     interactive(points, d => `${d.year}${d.road_user ? ` · ${d.road_user}` : ""}: ${measure === "percentage_share" ? pct(d[measure]) + " of national cases" : number(d[measure]) + " hospitalisations"}`);
+    if (id === "q2") {
+      const labels = series.filter(d => d.rows.some(row => row.year === years.at(-1)))
+        .map(d => ({ ...d, last: d.rows.find(row => row.year === years.at(-1)) }))
+        .sort((a, b) => y(a.last[measure]) - y(b.last[measure]));
+      labels.forEach((d, i) => { d.labelY = Math.max(y(d.last[measure]), i ? labels[i - 1].labelY + 20 : 64); });
+      if (labels.length && labels.at(-1).labelY > height - 50) {
+        labels.at(-1).labelY = height - 50;
+        for (let i = labels.length - 2; i >= 0; i--) labels[i].labelY = Math.min(labels[i].labelY, labels[i + 1].labelY - 20);
+      }
+      svg.selectAll("line.label-leader").data(labels, d => d.name).join("line").attr("class", "label-leader")
+        .attr("x1", x(years.at(-1)) + 6).attr("x2", width - 210).attr("y1", d => y(d.last[measure])).attr("y2", d => d.labelY).attr("stroke", d => d.colour);
+      svg.selectAll("text.series-label").data(labels, d => d.name).join("text").attr("class", "series-label")
+        .attr("x", width - 205).attr("y", d => d.labelY).attr("dominant-baseline", "middle").text(d => d.name);
+    }
     return { svg, x, y, height };
   }
 
   function updateNationalChart() {
-    const { svg, x, height } = lineChart("q1", national, "hospitalisations", [{ name: "National", colour: "#007c83", rows: national }],
+    const { svg, x, y, height } = lineChart("q1", national, "hospitalisations", [{ name: "National", colour: "#007c83", rows: national }],
       "National hospitalised injury cases by year. The vertical axis starts at zero. Reporting changes are marked for Victoria in 2012 and NSW from June 2017. Focus a point or open the data table for values.");
+    const peak = d3.greatest(national, d => d.hospitalisations);
+    const keyPoints = [...new Map([national[0], peak, national.at(-1)].map(d => [d.year, d])).values()];
+    svg.selectAll("text.key-value").data(keyPoints, d => d.year).join("text").attr("class", "key-value")
+      .attr("x", d => x(d.year)).attr("y", d => y(d.hospitalisations) + (d === national.at(-1) && d !== peak ? 24 : -14))
+      .attr("text-anchor", d => d === national[0] ? "start" : d === national.at(-1) ? "end" : "middle")
+      .text(d => `${d.year}: ${number(d.hospitalisations)}${d === peak ? " (peak)" : ""}`);
     const annotations = [{ year: 2012, label: "Victoria: 2012" }, { year: 2017 + 5 / 12, label: "NSW: June 2017" }];
     svg.selectAll("line.reporting").data(annotations).join("line").attr("class", "reporting")
       .attr("x1", d => x(d.year)).attr("x2", d => x(d.year)).attr("y1", 58).attr("y2", height - 48)
@@ -111,6 +132,7 @@ window.roadUserColour = roadUser => {
     const status = document.querySelector("#q3-status");
     if (end <= start) {
       status.textContent = "Choose an end year later than the start year.";
+      document.querySelector("#q3-insight").textContent = "A valid comparison needs an end year later than the start year.";
       d3.select("#q3-chart").selectAll("svg").remove();
       table("q3", ["Road user", "Change"], [], "Invalid year comparison");
       return;
@@ -121,6 +143,10 @@ window.roadUserColour = roadUser => {
       const change = first && last ? last.hospitalisations - first.hospitalisations : null;
       return { road_user, first, last, change, percentage: change == null || first.hospitalisations === 0 ? null : change / first.hospitalisations * 100 };
     }).sort((a, b) => (b.change ?? -Infinity) - (a.change ?? -Infinity) || d3.ascending(a.road_user, b.road_user));
+    const largest = changes.find(d => d.change > 0);
+    document.querySelector("#q3-insight").textContent = largest
+      ? `${start}–${end}: ${largest.road_user} had the largest increase among groups with complete records, +${number(largest.change)} cases (${pct(largest.percentage)}). This compares counts, not risk.`
+      : `${start}–${end}: no road user group with complete records increased. Missing records cannot be compared.`;
     const complete = changes.every(d => d.change != null);
     const total = d3.sum(changes, d => d.change);
     const firstNational = national.find(d => d.year === start), lastNational = national.find(d => d.year === end);
@@ -128,7 +154,7 @@ window.roadUserColour = roadUser => {
     status.textContent = !complete ? "Some group-year records are absent. Their changes are unavailable and reconciliation is incomplete." : `Group changes sum to ${number(total)} cases. ${nationalChange == null ? "National comparison unavailable." : `National change: ${number(nationalChange)} cases. ${total === nationalChange ? "Totals reconcile." : "Warning: totals do not reconcile."}`}`;
     const { svg, width, height } = frame("q3", `Changes from ${start} to ${end}. Bars extend left for decreases and right for increases. All road users are retained. Missing records are labelled, not treated as zero.`, groups.length * 42 + 80);
     const limit = d3.max(changes, d => Math.abs(d.change)) || 1;
-    const x = d3.scaleLinear().domain([-limit, limit]).nice().range([260, width - 30]);
+    const x = d3.scaleLinear().domain([-limit, limit]).nice().range([260, width - 85]);
     const y = d3.scaleBand().domain(changes.map(d => d.road_user)).range([30, height - 44]).padding(0.2);
     svg.selectAll("g.x-axis").data([null]).join("g").attr("class", "x-axis").attr("transform", `translate(0,${height - 40})`).call(d3.axisBottom(x).ticks(5).tickFormat(d3.format("+,")));
     svg.selectAll("text.axis-label").data([null]).join("text").attr("class", "axis-label").attr("x", 260).attr("y", 17).text(`Change in hospitalisation cases · ${start}–${end}`);
@@ -137,6 +163,9 @@ window.roadUserColour = roadUser => {
     const bars = svg.selectAll("rect.change-bar").data(changes.filter(d => d.change != null), d => d.road_user).join("rect")
       .attr("class", "change-bar").attr("x", d => x(Math.min(0, d.change))).attr("y", d => y(d.road_user))
       .attr("width", d => Math.max(1, Math.abs(x(d.change) - x(0)))).attr("height", y.bandwidth()).attr("fill", d => window.roadUserColour(d.road_user));
+    svg.selectAll("text.change-value").data(changes.filter(d => d.change != null), d => d.road_user).join("text").attr("class", "change-value")
+      .attr("x", d => x(Math.max(0, d.change)) + 8).attr("y", d => y(d.road_user) + y.bandwidth() / 2)
+      .attr("dominant-baseline", "middle").text(d => d3.format("+,")(d.change));
     interactive(bars, d => `${d.road_user} · ${start}: ${number(d.first.hospitalisations)} cases · ${end}: ${number(d.last.hospitalisations)} cases · Change: ${number(d.change)} cases (${pct(d.percentage)})`);
     svg.selectAll("text.missing").data(changes.filter(d => d.change == null)).join("text").attr("class", "missing").attr("x", x(0) + 8).attr("y", d => y(d.road_user) + y.bandwidth() / 2).text("Missing record");
     table("q3", ["Road user", `${start} cases`, `${end} cases`, "Absolute change", "Percentage change"], changes.map(d => [d.road_user, d.first ? number(d.first.hospitalisations) : "No record", d.last ? number(d.last.hospitalisations) : "No record", d.change == null ? "N/A" : number(d.change), pct(d.percentage)]), `${start}–${end}; percentage change is N/A when start cases are zero or a record is absent`);
@@ -155,11 +184,20 @@ window.roadUserColour = roadUser => {
       }
       groups = [...new Set(annual.map(d => d.road_user))].sort(d3.ascending);
       years = [...new Set([...national, ...annual].map(d => d.year))].sort(d3.ascending);
-      selected = new Set(groups);
+      selected = new Set(defaultGroups.filter(group => groups.includes(group)));
       const labels = d3.select("#q2-groups").selectAll("label").data(groups).join("label");
-      labels.append("input").attr("type", "checkbox").attr("checked", true).attr("value", d => d).on("change", (event, d) => { if (event.target.checked) selected.add(d); else selected.delete(d); updateRoadUserChart(); });
+      labels.attr("for", (d, i) => `road-user-${i}`);
+      labels.append("input").attr("type", "checkbox").property("checked", d => selected.has(d)).attr("id", (d, i) => `road-user-${i}`).attr("value", d => d).on("change", (event, d) => { if (event.target.checked) selected.add(d); else selected.delete(d); updateRoadUserChart(); });
       labels.append("i").style("background", window.roadUserColour).attr("aria-hidden", "true");
       labels.append("span").text(d => d);
+      const reset = document.querySelector("#q2-reset");
+      reset.disabled = false;
+      reset.addEventListener("click", () => {
+        selected = new Set(defaultGroups.filter(group => groups.includes(group)));
+        labels.select("input").property("checked", d => selected.has(d));
+        document.querySelector("#q2-measure").value = "hospitalisations";
+        updateRoadUserChart();
+      });
       const comparisonYears = [...new Set(annual.map(d => d.year))].sort(d3.ascending);
       for (const [id, preferred, fallback] of [["q3-start", 2011, comparisonYears[0]], ["q3-end", 2021, comparisonYears.at(-1)]]) {
         const select = document.getElementById(id);

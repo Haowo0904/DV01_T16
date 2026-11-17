@@ -15,14 +15,21 @@ async function run() {
   const change = (id, value) => { get(id).value = value; get(id).dispatchEvent(new w.Event("change")); };
   assert.equal(all("svg").length, 5, get("#trend-status").textContent);
   assert.equal(all("#q1-chart circle").length, 11);
-  assert.equal(all("#q2-chart .series").length, 12);
+  assert.equal(all("#q2-chart .series").length, 3);
+  assert.equal(all("#q2-chart .series-label").length, 3);
+  assert.match(get("#q3-insight").textContent, /Pedal cyclist/);
+  assert.equal(all("#q3-chart .change-value").length, 12);
   change("#q2-measure", "percentage_share");
-  assert.match(get("#q2-chart .data-point").getAttribute("aria-label"), /0.6% of national cases/);
+  assert.match(get("#q2-chart .data-point").getAttribute("aria-label"), /% of national cases/);
   for (const input of all("#q2-groups input")) { input.checked = false; input.dispatchEvent(new w.Event("change")); }
   assert.equal(all("#q2-chart .data-point").length, 0);
   assert.match(get("#q2-status").textContent, /No groups/);
   const input = get("#q2-groups input"); input.checked = true; input.dispatchEvent(new w.Event("change"));
   assert.equal(all("#q2-chart .series").length, 1);
+  get("#q2-reset").click();
+  assert.equal(all("#q2-chart .series").length, 3);
+  assert.equal(get("#q2-measure").value, "hospitalisations");
+  assert.deepEqual(all("#q2-groups input:checked").map(n => n.value), ["Car driver", "Motorcyclist", "Pedal cyclist"]);
   assert.match(get("#q3-status").textContent, /Totals reconcile/);
   change("#q3-start", "2021");
   assert.match(get("#q3-status").textContent, /later/);
@@ -35,6 +42,8 @@ async function run() {
     for (const id of ["q4", "q5"]) assert.match(get(`#${id}-title`).textContent, new RegExp(year));
     assert.equal(all("#q4-chart .age-cell").length, 96);
     assert.equal(all("svg").length, 5);
+    assert.match(get("#q4-insight").textContent, new RegExp(year));
+    assert.match(get("#q5-insight").textContent, new RegExp(year));
   }
   assert.deepEqual(all("#q4-chart .column-labels text").map(n => n.textContent), ["0–7", "8–16", "17–25", "26–39", "40–64", "65–74", "75+", "Missing"]);
   assert.ok(all("#q4-chart .age-cell").some(n => n.getAttribute("aria-label").includes("No record")));

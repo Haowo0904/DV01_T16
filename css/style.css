@@ -189,6 +189,29 @@ main tbody tr:nth-child(even) { background: #f7fafb; }
 main summary { cursor: pointer; padding: 0.5rem 0; font-weight: 600; }
 #trend-tooltip { position: fixed; z-index: 20; max-width: min(340px, calc(100vw - 40px)); padding: 0.75rem; border-radius: 0.5rem; color: white; background: #123b56; font-size: 0.875rem; pointer-events: none; }
 /* Updates are immediate: no animation, including for reduced-motion users. */
+* { box-sizing: border-box; }
+body { overflow-wrap: break-word; }
+h1, h2, h3 { text-wrap: balance; }
+p, li { text-wrap: pretty; }
+a, code { overflow-wrap: anywhere; }
+.skip-link { position: fixed; top: 0.5rem; left: 0.5rem; z-index: 50; padding: 0.75rem; background: white; color: #123b56; transform: translateY(-180%); }
+.skip-link:focus { transform: translateY(0); }
+.eyebrow { font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.8rem; }
+.insight { border-left: 4px solid #007c83; background: #edf7f7; padding: 1rem; }
+.key-figures { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); gap: 1rem; }
+.key-figures p { margin: 0; padding: 1rem; background: #eef4f7; border-radius: 0.5rem; }
+.key-figures strong { display: block; color: #123b56; font-size: 1.8rem; }
+.key-figures span { display: block; font-size: 0.85rem; }
+#takeaways, #methodology { grid-column: 1 / -1; min-width: 0; }
+button { font: inherit; padding: 0.5rem 1rem; border: 1px solid #007c83; border-radius: 0.4rem; background: #edf7f7; color: #123b56; cursor: pointer; }
+button:disabled { cursor: default; opacity: 0.6; }
+button, select, nav a, #q2-groups label { min-block-size: 24px; min-inline-size: 24px; }
+nav a { display: inline-flex; align-items: center; }
+.key-value, .change-value, .series-label { fill: #18324b; font-weight: 600; }
+.key-value { paint-order: stroke; stroke: white; stroke-width: 4px; stroke-linejoin: round; }
+@media (pointer: coarse) {
+  button, select, nav a, #q2-groups label { min-block-size: 44px; }
+}
 
 @media (max-width: 700px) {
   body {

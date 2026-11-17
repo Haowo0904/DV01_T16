@@ -11,17 +11,21 @@
   <script src="js/distributions.js" defer></script>
 </head>
 <body>
+  <a class="skip-link" href="#overview-heading">Skip to the data story</a>
   <header>
     <p>Australia · 2011–2021</p>
     <h1>Hospitalised Road Crash Injuries</h1>
-    <p>Exploring non-fatal hospitalised injuries associated with road traffic crashes.</p>
+    <p>A decade of recorded injuries: a rising national total, changing road user patterns, and contrasting demographic profiles.</p>
   </header>
-  <nav aria-label="Section navigation"><a href="#overview">Overview</a><a href="#comparison">Road User Comparison and Changes</a><a href="#distributions">Age and Sex Distributions</a></nav>
+  <nav aria-label="Section navigation"><a href="#overview">Overview</a><a href="#comparison">Road User Comparison and Changes</a><a href="#distributions">Age and Sex Distributions</a><a href="#takeaways">Takeaways</a><a href="#methodology">Sources &amp; methods</a></nav>
   <main>
     <section id="overview" aria-labelledby="overview-heading">
-      <h2 id="overview-heading">Overview</h2>
+      <p class="eyebrow">01 / The national picture</p>
+      <h2 id="overview-heading" tabindex="-1">More recorded cases at the end of the decade</h2>
       <p>Explore hospitalised road crash injury trends by road user group in Australia, 2011–2021, using BITRE’s September 2023 data release.</p>
-      <h3>Q1 · National trend</h3>
+      <h3>Recorded hospitalisations increased 16.1% from 2011 to 2021</h3>
+      <p class="insight">Cases rose from <strong>34,033</strong> to <strong>39,505</strong>: 5,472 more recorded hospitalisations. Reporting changes limit interpretation of this increase.</p>
+      <div class="key-figures"><p><strong>34,033</strong><span>2011 cases</span></p><p><strong>39,505</strong><span>2021 cases</span></p><p><strong>+16.1%</strong><span>Observed change, 2011–2021</span></p></div>
       <p>How did total hospitalised road crash injury cases change from 2011 to 2021?</p>
       <p id="trend-status" role="status">Loading national and road user data…</p>
       <div id="q1-chart" class="distribution-scroll" role="region" aria-label="National trend chart" tabindex="0"></div>
@@ -29,19 +33,25 @@
       <details><summary>View national trend data table</summary><div id="q1-table" class="distribution-scroll" tabindex="0"></div></details>
     </section>
     <section id="comparison" aria-labelledby="comparison-heading">
-      <h2 id="comparison-heading">Road User Comparison and Changes</h2>
+      <p class="eyebrow">02 / Behind the total</p>
+      <h2 id="comparison-heading">The increase was uneven across road users</h2>
+      <p>The national total hides contrasting patterns. Compare three major groups first, then examine how every group contributed to the change.</p>
       <article>
-        <h3>Q2 · Road user trends</h3>
+        <h3>Pedal cyclist cases grew faster than car driver and motorcyclist cases</h3>
+        <p class="insight">Between 2011 and 2021, pedal cyclist cases increased <strong>51.4%</strong>, compared with <strong>21.7%</strong> for car drivers and <strong>17.4%</strong> for motorcyclists. These are changes in counts, not injury rates.</p>
         <p>How did case counts and percentages change across road user groups? Shares use the national total for the same year, regardless of which groups are selected.</p>
         <label for="q2-measure">Measure</label>
         <select id="q2-measure" disabled><option value="hospitalisations">Hospitalisation cases</option><option value="percentage_share">Share of national cases (%)</option></select>
-        <fieldset id="q2-groups"><legend>Road user groups</legend></fieldset>
+        <p id="q2-help">Start with three major groups. Add other groups to investigate contrasts; switch to share to compare composition rather than volume.</p>
+        <button id="q2-reset" type="button" disabled>Reset comparison</button>
+        <fieldset id="q2-groups" aria-describedby="q2-help"><legend>Road user groups</legend></fieldset>
         <p id="q2-status" role="status"></p>
         <div id="q2-chart" class="distribution-scroll" role="region" aria-label="Road user trend chart" tabindex="0"></div>
         <details><summary>View road user trend data table</summary><div id="q2-table" class="distribution-scroll" tabindex="0"></div></details>
       </article>
       <article>
-        <h3>Q3 · Changes between two years</h3>
+        <h3>Which groups contributed to the change?</h3>
+        <p id="q3-insight" class="insight"></p>
         <p>Which road user groups contributed most to the change in total cases? Bars show signed changes in case counts, ordered from the largest increase to the largest decrease. All groups remain in this comparison.</p>
         <div class="distribution-controls"><label for="q3-start">Start year</label><select id="q3-start" disabled></select><label for="q3-end">End year</label><select id="q3-end" disabled></select></div>
         <p id="q3-status" role="status"></p>
@@ -50,8 +60,9 @@
       </article>
     </section>
     <section id="distributions" aria-labelledby="distributions-heading">
-      <h2 id="distributions-heading">Age and Sex Distributions</h2>
-      <p>Compare the composition of hospitalised injury cases within each road user group.</p>
+      <p class="eyebrow">03 / Who appears in the records?</p>
+      <h2 id="distributions-heading">Road users have different demographic profiles</h2>
+      <p>Having identified changes by road user, compare the age and sex composition within each group. The default is 2021, the final year in these extracts. Change the shared year to examine earlier profiles; these charts show composition, not demographic trends or risk.</p>
       <div class="distribution-controls">
         <label for="distribution-year">Year for both charts</label>
         <select id="distribution-year" disabled></select>
@@ -59,7 +70,8 @@
       <p id="distribution-status" role="status" aria-live="polite">Loading age and sex data…</p>
       <p class="distribution-help">Hover, focus with Tab, or tap a cell or segment for details. Press Escape to dismiss. On small screens, scroll each chart horizontally.</p>
       <article aria-labelledby="q4-heading">
-        <h3 id="q4-heading">Q4 · Age distribution</h3>
+        <h3 id="q4-heading">Age profiles vary across road users</h3>
+        <p id="q4-insight" class="insight"></p>
         <p>How did the age distribution of hospitalised injury cases differ across road user groups in a selected year?</p>
         <div id="q4-legend" class="distribution-legend"></div>
         <div id="q4-chart" class="distribution-scroll" role="region" aria-label="Age distribution heatmap, horizontally scrollable" tabindex="0"></div>
@@ -67,7 +79,8 @@
         <details><summary>View age distribution data table</summary><div id="q4-table" class="distribution-scroll" role="region" aria-label="Age distribution table" tabindex="0"></div></details>
       </article>
       <article aria-labelledby="q5-heading">
-        <h3 id="q5-heading">Q5 · Sex distribution</h3>
+        <h3 id="q5-heading">Compare recorded sex composition within each road user group</h3>
+        <p id="q5-insight" class="insight"></p>
         <p>How did the sex distribution of hospitalised injury cases differ across road user groups in a selected year?</p>
         <div id="q5-legend" class="distribution-legend"></div>
         <div id="q5-chart" class="distribution-scroll" role="region" aria-label="Sex distribution bars, horizontally scrollable" tabindex="0"></div>
@@ -76,6 +89,25 @@
       </article>
       <div id="distribution-tooltip" role="tooltip" hidden></div>
       <noscript>Enable JavaScript to view the interactive charts. Source data: <a href="data/q4_age_distribution.csv">age CSV</a> and <a href="data/q5_sex_distribution.csv">sex CSV</a>.</noscript>
+    </section>
+    <section id="takeaways" aria-labelledby="takeaways-heading">
+      <p class="eyebrow">04 / What the evidence tells us</p>
+      <h2 id="takeaways-heading">A larger recorded burden, with different patterns beneath it</h2>
+      <p>Recorded cases increased by 5,472 between 2011 and 2021. Pedal cyclists had the largest absolute increase (+2,772), followed by car drivers (+2,379) and motorcyclists (+1,318). Decreases in other groups offset part of these increases.</p>
+      <p>Age and sex composition add context to those patterns. They describe who appears in the hospitalisation records, but cannot establish who was most at risk or why the counts changed.</p>
+      <p>Population growth, travel exposure and reporting changes must be considered before interpreting these results as changes in safety. This story does not estimate the effects of policy, behaviour or the pandemic.</p>
+      <a href="#comparison">Return to the road user comparison</a>
+    </section>
+    <section id="methodology" aria-labelledby="methodology-heading">
+      <h2 id="methodology-heading">Sources, methods and limitations</h2>
+      <p>Source: <a href="https://www.bitre.gov.au/publications/ongoing/hospitalised-injury">BITRE Hospitalised Injury Data</a>, September 2023 release as identified in the supplied project extracts, covering 2011–2021. The source page provides the workbooks and accompanying data dictionary. This story focuses on national road user patterns.</p>
+      <details><summary>How to interpret these charts</summary>
+        <ul><li>Counts represent hospitalised cases, not crashes or fatalities.</li><li>Road user shares use the national total for that year. Age and sex shares use the total for the same year and road user.</li><li>Year comparisons subtract start counts from end counts. Percentage change divides that difference by the start count; a zero start has no defined percentage change.</li><li>Missing combinations remain “No record”; explicit zeros remain zero. Age bands have unequal widths.</li><li>Victoria’s 2012 and NSW’s June 2017 reporting changes affect comparability. Counts are not adjusted for population or travel exposure.</li></ul>
+      </details>
+      <p>The original workbooks and extraction workflow are not included in this repository, so their exact worksheets and raw-data derivation remain unverified. See the <a href="docs/methodology.md">processing and design record</a> and <a href="docs/usability-evaluation.md">usability evaluation protocol</a>. Participant testing is pending.</p>
+      <details><summary>Download the chart data</summary><ul>
+        <li><a href="data/q1_national_trend.csv" download>National cases CSV</a></li><li><a href="data/q2_road_user_trends.csv" download>Road user trends CSV</a></li><li><a href="data/q3_road_user_changes.csv" download>Reference year changes CSV</a></li><li><a href="data/q4_age_distribution.csv" download>Age distribution CSV</a></li><li><a href="data/q5_sex_distribution.csv" download>Sex distribution CSV</a></li>
+      </ul></details>
     </section>
   </main>
   <div id="trend-tooltip" role="tooltip" hidden></div>

@@ -16,6 +16,14 @@ Use HTTP rather than opening index.html directly. No build or deployment is need
 
 ## Project files
 
+## Data story improvements
+
+The page follows national change → road user contributions → demographic profiles → takeaways. Q2 starts with car drivers, motorcyclists and pedal cyclists; Reset comparison restores that selection and counts. Chart labels expose important values without hover, and demographic insights follow the shared year. The age colour scale is fixed across all years using the rounded-up global maximum.
+
+See [processing and design record](docs/methodology.md) for transformations, evidence and source provenance gaps, and [usability evaluation](docs/usability-evaluation.md) for the participant protocol and blank results template. Participant testing and original-workbook extraction provenance still need team evidence before submission.
+
+### File inventory
+
 - index.html: navigation, Q1 overview, Q2/Q3 comparison section, Q4/Q5 demographics,
   controls, accessible descriptions, tables and source/limitation notes.
 - js/main.js: shared road user colours and modular Q1-Q3 updates. Q1/Q2 load once;
@@ -54,6 +62,18 @@ DOM checks cover charts, controls, comparison validation, shared year updates,
 missing vs zero cells, tooltip events and repeated resize joins. They do not
 verify visual browser layout, real touch devices or screen-reader behaviour.
 Inspect wide/narrow layouts, keyboard focus and tooltip positioning manually.
+
+Optional Edge browser checks (start the local server first):
+
+```powershell
+npm.cmd install --prefix "$env:TEMP/dv01-chart-qa" --no-audit --no-fund --package-lock=false playwright
+node scripts/check_browser.cjs
+```
+
+These check desktop, 390px and 320px layouts for page overflow, runtime errors,
+shared-year updates and reset behaviour. Screenshots are saved in the temporary
+directory. These checks passed during implementation alongside data and DOM
+checks; they do not replace participant, screen-reader or real-touch testing.
 
 Source: BITRE September 2023 release, via supplied project extracts. Reporting
 changes in Victoria in 2012 and NSW from June 2017 affect comparability. Counts
