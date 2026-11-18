@@ -1,11 +1,21 @@
 "use strict";
 
 // Shared road user palette; demographic colours encode age/sex, not road user.
-window.roadUserColour = roadUser => {
-  const groups = ["Bus occupant", "Car driver", "Car passenger", "Car unknown position", "Heavy transport driver", "Heavy transport passenger", "Heavy transport unknown position", "Motorcyclist", "Other or unknown", "Pedal cyclist", "Pedestrian", "Pick-up truck or van occupant"];
-  const colours = ["#007c83", "#a34717", "#5964ac", "#a33875", "#557522", "#7b503b", "#566778", "#1669a1", "#794c98", "#b02e35", "#28764d", "#856300"];
-  return colours[groups.indexOf(roadUser)] || "#536678";
-};
+const roadUserColours = new Map([
+  ["Car driver", "#1F78B4"],
+  ["Car passenger", "#6BAED6"],
+  ["Car unknown position", "#5E4FA2"],
+  ["Motorcyclist", "#FF7F00"],
+  ["Pedal cyclist", "#E31A1C"],
+  ["Pedestrian", "#33A02C"],
+  ["Bus occupant", "#008080"],
+  ["Pick-up truck or van occupant", "#E6AB02"],
+  ["Heavy transport driver", "#882255"],
+  ["Heavy transport passenger", "#CC6677"],
+  ["Heavy transport unknown position", "#666666"],
+  ["Other or unknown", "#A6761D"]
+]);
+window.roadUserColour = roadUser => roadUserColours.get(roadUser) ?? "#536678";
 
 (() => {
   const fmt = new Intl.NumberFormat("en-AU");
@@ -162,7 +172,8 @@ window.roadUserColour = roadUser => {
     svg.selectAll("line.zero").data([null]).join("line").attr("class", "zero").attr("x1", x(0)).attr("x2", x(0)).attr("y1", 28).attr("y2", height - 40).attr("stroke", "#18324b");
     const bars = svg.selectAll("rect.change-bar").data(changes.filter(d => d.change != null), d => d.road_user).join("rect")
       .attr("class", "change-bar").attr("x", d => x(Math.min(0, d.change))).attr("y", d => y(d.road_user))
-      .attr("width", d => Math.max(1, Math.abs(x(d.change) - x(0)))).attr("height", y.bandwidth()).attr("fill", d => window.roadUserColour(d.road_user));
+      .attr("width", d => Math.max(1, Math.abs(x(d.change) - x(0)))).attr("height", y.bandwidth())
+      .attr("fill", d => d.change === 0 ? "transparent" : d.change < 0 ? "#b02e35" : "#28764d");
     svg.selectAll("text.change-value").data(changes.filter(d => d.change != null), d => d.road_user).join("text").attr("class", "change-value")
       .attr("x", d => x(Math.max(0, d.change)) + 8).attr("y", d => y(d.road_user) + y.bandwidth() / 2)
       .attr("dominant-baseline", "middle").text(d => d3.format("+,")(d.change));
