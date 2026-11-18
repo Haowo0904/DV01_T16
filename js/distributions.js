@@ -15,6 +15,7 @@
   const ageLabel = value => value.replace(/-/g, "–");
   const key = (roadUser, category) => JSON.stringify([roadUser, category]);
   let colour, sexColour;
+  let ageScaleMax;
 
   function parseRow(category) {
     return row => {
@@ -106,11 +107,16 @@
 
   function updateAgeChart() {
     const rows = ageData.filter(d => d.year === selectedYear);
+    const profiles = ["Car driver", "Motorcyclist", "Pedal cyclist"].map(group => {
+      const peak = d3.greatest(rows.filter(d => d.road_user === group && d.age_group !== "Missing"), d => d.percentage_share);
+      return peak ? `${group}: ${ageLabel(peak.age_group)} (${percent(peak.percentage_share)})` : `${group}: no recorded age profile`;
+    });
+    document.querySelector("#q4-insight").textContent = `${selectedYear} · Largest recorded age band in each featured group: ${profiles.join("; ")}. Shares use each road user total; unequal age-band widths prevent interpreting these as age-specific risk.`;
     const lookup = new Map(rows.map(d => [key(d.road_user, d.age_group), d]));
     const cells = roadUsers.flatMap(road_user => ages.map(age_group =>
       lookup.get(key(road_user, age_group)) || { road_user, age_group, absent: true }));
     const { svg, xStart, xEnd, y } = frame("q4", "Age distribution heatmap",
-      "Rows are road users; columns are age groups in ascending order, then Missing. Colour shows share on a fixed 0–100% scale across years. Hatched cells have no record. Exact values are available by keyboard focus and in the data table.");
+      `Rows are road users; columns are age groups in ascending order, then Missing. Colour shows share on a fixed 0–${ageScaleMax}% scale across all years. Hatched cells have no record. Exact values are available by keyboard focus and in the data table.`);
     const defs = svg.selectAll("defs").data([null]).join("defs");
     const pattern = defs.selectAll("pattern").data([null]).join("pattern")
       .attr("id", "q4-absent").attr("patternUnits", "userSpaceOnUse").attr("width", 6).attr("height", 6);
@@ -128,7 +134,7 @@
     svg.selectAll("text.cell-value").data(cells).join("text").attr("class", "cell-value")
       .attr("x", d => x(d.age_group) + x.bandwidth() / 2).attr("y", d => y(d.road_user) + y.bandwidth() / 2)
       .attr("text-anchor", "middle").attr("dominant-baseline", "middle").attr("pointer-events", "none")
-      .attr("fill", d => !d.absent && d.percentage_share >= 55 ? "white" : "#18324b")
+      .attr("fill", d => !d.absent && d.percentage_share >= ageScaleMax * 0.6 ? "white" : "#18324b")
       .text(d => d.absent ? "—" : percent(d.percentage_share));
     updateTable("q4", cells, "age_group");
     return rows.length;
@@ -136,6 +142,11 @@
 
   function updateSexChart() {
     const rows = sexData.filter(d => d.year === selectedYear);
+    const featured = ["Car driver", "Motorcyclist", "Pedal cyclist"].map(group => {
+      const male = rows.find(d => d.road_user === group && d.sex === "Male");
+      return male ? `${group}: ${percent(male.percentage_share)}` : `${group}: no male record`;
+    });
+    document.querySelector("#q5-insight").textContent = `${selectedYear} · Recorded male share: ${featured.join("; ")}. These within-group percentages do not compare injury risk between sexes.`;
     const lookup = new Map(rows.map(d => [key(d.road_user, d.sex), d]));
     const segments = [], tableRows = [], totals = [];
     for (const road_user of roadUsers) {
@@ -163,6 +174,10 @@
       .attr("width", d => x(d.percentage_share) - x(0)).attr("height", y.bandwidth())
       .attr("fill", d => sexColour(d.sex));
     interactive(marks, "sex");
+    svg.selectAll("text.segment-value").data(segments.filter(d => x(d.percentage_share) - x(0) >= 58), d => key(d.road_user, d.sex))
+      .join("text").attr("class", "segment-value").attr("x", d => x(d.start + d.percentage_share / 2))
+      .attr("y", d => y(d.road_user) + y.bandwidth() / 2).attr("text-anchor", "middle")
+      .attr("dominant-baseline", "middle").attr("fill", "white").attr("pointer-events", "none").text(d => percent(d.percentage_share));
     svg.selectAll("text.no-record").data(totals.filter(d => !d.recorded)).join("text").attr("class", "no-record")
       .attr("x", xStart + 10).attr("y", d => y(d.road_user) + y.bandwidth() / 2).attr("dominant-baseline", "middle").text("No records");
     const invalid = totals.filter(d => d.recorded && Math.abs(d.total - 100) > 0.1);
@@ -175,11 +190,11 @@
 
   function renderLegends() {
     const legend = d3.select("#q4-legend");
-    legend.append("span").text("Share of hospitalisations (%) · fixed scale");
+    legend.append("span").text(`Share of hospitalisations (%) · fixed 0–${ageScaleMax}% scale across all years`);
     const ramp = legend.append("div").attr("class", "age-colour-legend");
     ramp.append("div").attr("class", "age-colour-ramp").style("background",
-      `linear-gradient(to right, ${d3.range(0, 101, 10).map(value => colour(value)).join(",")})`);
-    ramp.append("div").attr("class", "age-colour-ticks").selectAll("span").data([0, 25, 50, 75, 100]).join("span").text(d => `${d}%`);
+      `linear-gradient(to right, ${d3.range(0, 11).map(value => colour(value * ageScaleMax / 10)).join(",")})`);
+    ramp.append("div").attr("class", "age-colour-ticks").selectAll("span").data(d3.range(0, 5).map(d => d * ageScaleMax / 4)).join("span").text(d => `${d}%`);
     legend.append("span").attr("class", "absent-key").text("▧ No record · 0.0% is an explicit zero");
     const items = d3.select("#q5-legend").selectAll("span").data(sexes).join("span").attr("class", "sex-legend-item");
     items.append("i").style("background-color", d => sexColour(d)).attr("aria-hidden", "true");
@@ -213,7 +228,8 @@
         const rank = value => sexOrder.includes(value) ? sexOrder.indexOf(value) : 99;
         return rank(a) - rank(b) || d3.ascending(a, b);
       });
-      colour = d3.scaleSequential(d3.interpolateBlues).domain([0, 100]);
+      ageScaleMax = Math.max(10, Math.ceil(d3.max(ageData, d => d.percentage_share) / 10) * 10);
+      colour = d3.scaleSequential(d3.interpolateBlues).domain([0, ageScaleMax]);
       sexColour = d3.scaleOrdinal().domain(sexes).range(["#007c83", "#b65723", "#7864a7", "#627487"]);
       const years = [...new Set(allRows.map(d => d.year))].sort(d3.ascending);
       selectedYear = years.includes(2021) ? 2021 : years[years.length - 1];
