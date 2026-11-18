@@ -173,7 +173,7 @@ window.roadUserColour = roadUser => roadUserColours.get(roadUser) ?? "#536678";
     const bars = svg.selectAll("rect.change-bar").data(changes.filter(d => d.change != null), d => d.road_user).join("rect")
       .attr("class", "change-bar").attr("x", d => x(Math.min(0, d.change))).attr("y", d => y(d.road_user))
       .attr("width", d => Math.max(1, Math.abs(x(d.change) - x(0)))).attr("height", y.bandwidth())
-      .attr("fill", d => d.change === 0 ? "transparent" : d.change < 0 ? "#b02e35" : "#28764d");
+      .attr("fill", d => d.change === 0 ? "transparent" : d.change < 0 ? "#d45359" : "#5aa46b");
     svg.selectAll("text.change-value").data(changes.filter(d => d.change != null), d => d.road_user).join("text").attr("class", "change-value")
       .attr("x", d => x(Math.max(0, d.change)) + 8).attr("y", d => y(d.road_user) + y.bandwidth() / 2)
       .attr("dominant-baseline", "middle").text(d => d3.format("+,")(d.change));
